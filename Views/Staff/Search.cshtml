@@ -1,0 +1,71 @@
+@model StaffMember;
+
+@{
+    StaffMember member = Model;
+    if (member == null)
+    {
+        member = new StaffMember
+        {
+            StaffId = 0,
+            FullName = "",
+            Email = "",
+            Position = "",
+            Unit = ""
+        };
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @{
+        ViewData["Title"] = "Search Staff Member";
+    }
+</head>
+<body>
+    <h1>Search Staff Members</h1>
+    <form class="d-flex input-group w-auto" asp-controller="Staff" asp-action="Search" method="post" asp-fragment="staffId">
+        <input type="number" name="staffId" class="form-control rounded" placeholder="Search by Staff ID" aria-label="Search" aria-describedby="search-addon"/>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    </form>
+
+    <hr class="border border-3 border-dark">
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-6 p-4 border border-black"><h3><b>Staff ID:</b> @member.StaffId</h3></div>
+            <div class="col-md-6 p-4 border border-black"><h3><b>Full Name:</b> @member.FullName</h3></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 p-4 border border-black"><h4><b>E-mail:</b> @member.Email</h4></div>
+            <div class="col-md-4 p-4 border border-black"><h4><b>Position:</b> @member.Position</h4></div>
+            <div class="col-md-4 p-4 border border-black"><h4><b>Unit:</b> @member.Unit</h4></div>
+        </div>
+
+    </div><br>
+
+    @* Edit and Delete Forms *@
+    @* Only displayed if a staff member is found *@
+    @{
+        if (member.StaffId != 0) {
+            <div class="d-flex gap-3">
+                <form asp-controller="Staff" asp-action="Edit" asp-fragment="staffId" method="get">
+                    <input type="hidden" name="staffId" value="@member.StaffId" />
+                    <button type="submit" class="btn btn-primary">Edit Staff Member</button>
+                </form>
+
+                <form asp-controller="Staff" asp-action="Delete" asp-fragment="staffId" method="post">
+                    <input type="hidden" name="staffId" value="@member.StaffId" />
+                    <button type="submit" class="btn btn-danger">Delete Staff Member</button>
+                </form>
+            </div>
+        }
+    }
+
+</body>
+</html>
+
+

@@ -1,0 +1,50 @@
+@model StaffMember
+
+@{
+	ViewData["Title"] = "Create New Staff Member";
+}
+
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-8 col-lg-6">
+			<h1 class="mb-4">Create New Staff Member</h1>
+
+			<form asp-controller="Staff" asp-action="Create" method="post">
+                <input type="hidden" asp-for="StaffId" value="0"/>
+
+				<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+				<div class="mb-3">
+					<label asp-for="FullName" class="form-label">Full name</label>
+					<input asp-for="FullName" class="form-control"/>
+					<span asp-validation-for="FullName" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="Email" class="form-label">Email</label>
+					<input asp-for="Email" class="form-control"/>
+					<span asp-validation-for="Email" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="Position" class="form-label">Position</label>
+					<input asp-for="Position" class="form-control"/>
+					<span asp-validation-for="Position" class="text-danger"></span>
+				</div>
+
+				<div class="mb-4">
+					<label asp-for="Unit" class="form-label">Unit</label>
+					<input asp-for="Unit" class="form-control"/>
+					<span asp-validation-for="Unit" class="text-danger"></span>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Create Member</button>
+				<a asp-controller="Staff" asp-action="Index" class="btn btn-secondary">Cancel</a>
+			</form>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

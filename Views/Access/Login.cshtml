@@ -1,0 +1,41 @@
+@model SystemAdmin
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @{
+        ViewData["Title"] = "Login Page";
+    }
+</head>
+
+<body class="text-center">
+    <h1>KwesiHealth E.S.O.P.</h1>
+    <h2>Login Page</h2>
+    <br>
+
+    <form class="row d-flex flex-column align-content-center" asp-controller="Access" asp-action="Login" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger col-md-5 text-start"></div>
+
+        <div class="form-outline col-md-5 text-start">
+            <span asp-validation-for="Username" class="text-danger"></span>
+            <input class="form-control" asp-for="Username"/>
+            <label class="form-label" asp-for="Username">Username</label>
+        </div><br>
+
+        <div class="form-outline col-md-5 text-start">
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <input type="password" class="form-control" asp-for="Password"/>
+            <label class="form-label" asp-for="Password">Password</label>
+        </div><br>
+
+        <button type="submit" class="btn btn-primary align-self-center col-md-2">Login</button>
+    </form>
+</body>
+</html>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
